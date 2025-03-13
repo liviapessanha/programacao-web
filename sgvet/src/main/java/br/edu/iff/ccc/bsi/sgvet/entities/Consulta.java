@@ -10,6 +10,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.validation.constraints.NotBlank;
 
 @Entity
 public class Consulta implements Serializable {
@@ -31,22 +32,26 @@ public class Consulta implements Serializable {
 	@JoinColumn(name = "animal_id")
 	private Animal animal;
 	
+	@NotBlank(message = "Campo obrigatório.")
 	private String hora;
 	
+	@NotBlank(message = "Campo obrigatório.")
 	private String status;
 	
+	@NotBlank(message = "Campo obrigatório.")
 	private String motivo_consulta;
 	
 	private String observacoes;
 	
-	private double valor;
+	@NotBlank(message = "Campo obrigatório.")
+	private Double valor;
 
 	public Consulta() {
 		
 	}
 	
 	public Consulta(Long id, Funcionario funcionario, Cliente cliente, String hora, String status,
-			String motivo_consulta, String observacoes, double valor) {
+			String motivo_consulta, String observacoes, Double valor) {
 		super();
 		this.id = id;
 		this.funcionario = funcionario;
@@ -114,11 +119,11 @@ public class Consulta implements Serializable {
 		this.observacoes = observacoes;
 	}
 
-	public double getValor() {
+	public Double getValor() {
 		return valor;
 	}
 
-	public void setValor(double valor) {
+	public void setValor(Double valor) {
 		this.valor = valor;
 	}
 
