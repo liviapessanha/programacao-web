@@ -4,14 +4,21 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
 
+import br.edu.iff.ccc.bsi.sgvet.enums.Sexo;
 import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 
 @Entity
 public class Animal implements Serializable {
@@ -22,18 +29,32 @@ private static final long serialVersionUID = 1L;
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
 	
+	@NotBlank(message = "Campo obrigatório.")
+	@Size(min = 1, max = 80, message = "O nome deve ter entre 1 e 80 caracteres.")
+	@Column (length = 80)
 	private String nome;
 	
+	@NotBlank(message = "Campo obrigatório.")
+	@Size(min = 1, max = 80, message = "A espécie deve ter entre 1 e 80 caracteres.")
+	@Column (length = 80)
 	private String especie;
 	
+	@NotBlank(message = "Campo obrigatório.")
+	@Size(min = 1, max = 80, message = "A raça deve ter entre 1 e 80 caracteres.")
+	@Column (length = 80)
 	private String raca;
 	
+	@NotNull(message = "Campo obrigatório.")
 	private Integer idade;
 	
-	private String sexo;
+	@NotBlank(message = "Campo obrigatório.")
+	@Enumerated(EnumType.STRING)
+	private Sexo sexo;
 	
-	private double peso;
+	@NotNull(message = "Campo obrigatório.")
+	private Double peso;
 	
+	@NotBlank(message = "Campo obrigatório.")
 	private String cor;
 	
 	private String observacao;
@@ -49,7 +70,7 @@ private static final long serialVersionUID = 1L;
 		
 	}
 
-	public Animal(Long id, String nome, String especie, String raca, Integer idade, String sexo, double peso,
+	public Animal(Long id, String nome, String especie, String raca, Integer idade, Sexo sexo, Double peso,
 			String cor, String observacao, Cliente cliente, List<Consulta> consultas) {
 		super();
 		this.id = id;
@@ -105,19 +126,19 @@ private static final long serialVersionUID = 1L;
 		this.idade = idade;
 	}
 
-	public String getSexo() {
+	public Sexo getSexo() {
 		return sexo;
 	}
 
-	public void setSexo(String sexo) {
+	public void setSexo(Sexo sexo) {
 		this.sexo = sexo;
 	}
 
-	public double getPeso() {
+	public Double getPeso() {
 		return peso;
 	}
 
-	public void setPeso(double peso) {
+	public void setPeso(Double peso) {
 		this.peso = peso;
 	}
 
@@ -169,7 +190,4 @@ private static final long serialVersionUID = 1L;
 		Animal other = (Animal) obj;
 		return Objects.equals(id, other.id);
 	}
-	
-	
-	
 }

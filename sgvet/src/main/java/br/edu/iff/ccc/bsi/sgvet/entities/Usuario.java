@@ -3,10 +3,14 @@ package br.edu.iff.ccc.bsi.sgvet.entities;
 import java.io.Serializable;
 import java.util.Objects;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.MappedSuperclass;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 
 @MappedSuperclass
 public abstract class Usuario implements Serializable {
@@ -16,9 +20,20 @@ public abstract class Usuario implements Serializable {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
 	
+	@NotBlank(message = "Campo obrigatório.")
+	@Size(min = 1, max = 80, message = "O nome deve ter entre 1 e 80 caracteres.")
+	@Column (length = 80)
 	private String nome;
+	
+	@NotBlank(message = "Campo obrigatório.")
+	@Email(message = "O e-mail deve ser válido.")
 	private String email;
+	
+	@NotBlank(message = "Campo obrigatório.")
 	private String senha;
+	
+	@NotBlank(message = "Campo obrigatório.")
+	@Size(min = 11, max = 11, message = "O telefone deve ter 11 caracteres.")
 	private String telefone;
 	
 	public Usuario() {

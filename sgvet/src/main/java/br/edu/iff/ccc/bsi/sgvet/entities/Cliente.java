@@ -4,8 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.OneToMany;
+import jakarta.validation.constraints.NotBlank;
 
 @Entity
 public class Cliente extends Usuario {
@@ -17,7 +19,11 @@ public class Cliente extends Usuario {
 	@OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL)
 	private List<Animal> animais = new ArrayList<>();
 
+	@NotBlank(message = "Campo obrigatório.")
+	@Column(name = "CPF", unique = true, length = 11)
 	private String cpf;
+	
+	@NotBlank(message = "Campo obrigatório.")
 	private String endereco;
 	
 	public Cliente() {

@@ -6,6 +6,7 @@ import java.util.List;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.OneToMany;
+import jakarta.validation.constraints.NotBlank;
 
 @Entity
 public class Funcionario extends Usuario {
@@ -14,7 +15,10 @@ public class Funcionario extends Usuario {
 	@OneToMany(mappedBy = "funcionario", cascade = CascadeType.ALL)
 	private List<Consulta> consultas = new ArrayList<>();
 	
+	@NotBlank(message = "Campo obrigatório.")
 	private String cargo;
+	
+	@NotBlank(message = "Campo obrigatório.")
 	private String horario_trabalho;
 	
 	public Funcionario() {
