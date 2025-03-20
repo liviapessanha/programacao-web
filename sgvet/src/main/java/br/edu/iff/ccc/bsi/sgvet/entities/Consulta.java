@@ -127,6 +127,14 @@ public class Consulta implements Serializable {
 		this.valor = valor;
 	}
 
+	public Animal getAnimal() {
+		return animal;
+	}
+
+	public void setAnimal(Animal animal) {
+		this.animal = animal;
+	}
+
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);
@@ -143,7 +151,5 @@ public class Consulta implements Serializable {
 		Consulta other = (Consulta) obj;
 		return Objects.equals(id, other.id);
 	}
-	
-	
-	
+
 }
