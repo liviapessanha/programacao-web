@@ -3,7 +3,10 @@ package br.edu.iff.ccc.bsi.sgvet.entities;
 import java.io.Serializable;
 import java.util.Objects;
 
+import br.edu.iff.ccc.bsi.sgvet.enums.Papel;
 import jakarta.persistence.Column;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -36,17 +39,22 @@ public abstract class Usuario implements Serializable {
 	@Size(min = 11, max = 11, message = "O telefone deve ter 11 caracteres.")
 	private String telefone;
 	
+	@NotBlank(message = "Campo obrigatório.")
+	@Enumerated(EnumType.STRING)
+	private Papel papel;
+	
 	public Usuario() {
 		
 	}
 
-	public Usuario(Long id, String nome, String email, String senha, String telefone) {
+	public Usuario(Long id, String nome, String email, String senha, String telefone, Papel papel) {
 		super();
 		this.id = id;
 		this.nome = nome;
 		this.email = email;
 		this.senha = senha;
 		this.telefone = telefone;
+		this.papel = papel;
 	}
 
 	public Long getId() {
@@ -87,6 +95,14 @@ public abstract class Usuario implements Serializable {
 
 	public void setTelefone(String telefone) {
 		this.telefone = telefone;
+	}
+
+	public Papel getPapel() {
+		return papel;
+	}
+
+	public void setPapel(Papel papel) {
+		this.papel = papel;
 	}
 
 	@Override
