@@ -1,11 +1,12 @@
 package br.edu.iff.ccc.bsi.sgvet.services;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.server.ResponseStatusException;
 
 import br.edu.iff.ccc.bsi.sgvet.entities.Consulta;
 import br.edu.iff.ccc.bsi.sgvet.repository.ConsultaRepository;
@@ -21,8 +22,11 @@ public class ConsultaService {
 	}
 	
 	public Consulta getById(Long id) {
-		Optional<Consulta> consulta = consultaRep.findById(id);
-		return consulta.orElse(null);
+		return consultaRep.findById(id)
+			.orElseThrow(() -> new ResponseStatusException(
+					HttpStatus.NOT_FOUND,
+					"Consulta com ID " + id + " nao encontrado."
+			));
 	}
 	
 	@Transactional
@@ -32,14 +36,34 @@ public class ConsultaService {
 	
 	@Transactional
 	public void delete(Long id) {
+		if(!consultaRep.existsById(id)) {
+			throw new ResponseStatusException(
+					HttpStatus.NOT_FOUND,
+					"Consulta com ID " + id + " nao encontrado."
+			);
+		}
 		consultaRep.deleteById(id);
 	}
 	
 	public List<Consulta> getConsultasByClienteId(Long id) {
-		return consultaRep.findClienteById(id);
+		List<Consulta> consultas = consultaRep.findClienteById(id);
+		if(consultas.isEmpty()) {
+			throw new ResponseStatusException(
+					HttpStatus.NOT_FOUND,
+					"Nenhum cliente vinculado a essa consulta"
+			);
+		}
+		return consultas;
 	}
 	
 	public List<Consulta> getConsultasByAnimalId(Long id) {
-		return consultaRep.findAnimalById(id);
+		List<Consulta> consultas = consultaRep.findAnimalById(id);
+		if(consultas.isEmpty()) {
+			throw new ResponseStatusException(
+					HttpStatus.NOT_FOUND,
+					"Nenhum animal vinculado a essa consulta."
+			);
+		}
+		return consultas;
 	}
 }
