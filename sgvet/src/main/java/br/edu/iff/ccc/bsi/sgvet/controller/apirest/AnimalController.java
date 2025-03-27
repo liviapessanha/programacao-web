@@ -19,9 +19,11 @@ import br.edu.iff.ccc.bsi.sgvet.services.AnimalService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
 
 @RestController
 @RequestMapping("/api/v1/animais")
+@Tag(name = "AnimalRest", description = "API para gerenciamento de animais, Inclui operações CRUD e filtros por espécie, raça e cliente.")
 public class AnimalController {
 	@Autowired
 	public AnimalService animalServ;
@@ -54,7 +56,7 @@ public class AnimalController {
 	
 	@Operation(summary = "Cria um novo animal.")
 	@ApiResponses({
-		@ApiResponse(responseCode = "200", description = "Animal criado com seucesso."),
+		@ApiResponse(responseCode = "200", description = "Animal criado com sucesso."),
 		@ApiResponse(responseCode = "404", description = "Dados inválidos."),
 	})
 	@PostMapping

@@ -19,9 +19,11 @@ import br.edu.iff.ccc.bsi.sgvet.services.ConsultaService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
 
 @RestController
 @RequestMapping("/api/v1/consultas")
+@Tag(name = "ConsultaRest", description = "API para gerenciamento de consultas, Inclui operações CRUD e filtros por cliente e animal.")
 public class ConsultaController {
 
 	@Autowired
@@ -55,7 +57,7 @@ public class ConsultaController {
 	
 	@Operation(summary = "Cria uma nova consulta.")
 	@ApiResponses({
-		@ApiResponse(responseCode = "200", description = "Consulta criada com seucesso."),
+		@ApiResponse(responseCode = "200", description = "Consulta criada com sucesso."),
 		@ApiResponse(responseCode = "404", description = "Dados inválidos."),
 	})
 	@PostMapping

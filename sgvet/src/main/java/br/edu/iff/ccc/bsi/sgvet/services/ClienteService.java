@@ -1,11 +1,12 @@
 package br.edu.iff.ccc.bsi.sgvet.services;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.server.ResponseStatusException;
 
 import br.edu.iff.ccc.bsi.sgvet.entities.Cliente;
 import br.edu.iff.ccc.bsi.sgvet.repository.ClienteRepository;
@@ -21,8 +22,11 @@ public class ClienteService {
 	}
 	
 	public Cliente getById(Long id) {
-		Optional<Cliente> cliente = clienteRep.findById(id);
-		return cliente.orElse(null);
+		return clienteRep.findById(id)
+				.orElseThrow(() -> new ResponseStatusException(
+						HttpStatus.NOT_FOUND,
+						"Cliente com ID " + id + " nao encontrado"
+				));
 	}
 	
 	@Transactional
@@ -32,6 +36,12 @@ public class ClienteService {
 	
 	@Transactional
 	public void delete(Long id) {
+		if(!clienteRep.existsById(id)) {
+			throw new ResponseStatusException(
+					HttpStatus.NOT_FOUND,
+					"Cliente com ID " + id + " nao encontrado."
+			);
+		}
 		clienteRep.deleteById(id);
 	}
 }
