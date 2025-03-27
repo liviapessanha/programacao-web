@@ -3,6 +3,7 @@ package br.edu.iff.ccc.bsi.sgvet.entities;
 import java.util.ArrayList;
 import java.util.List;
 
+import br.edu.iff.ccc.bsi.sgvet.enums.Papel;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -30,8 +31,8 @@ public class Cliente extends Usuario {
 		
 	}
 
-	public Cliente(String cpf, String endereco) {
-		super();
+	public Cliente(Long id, String nome, String email, String senha, String telefone, Papel papel, String cpf, String endereco) {
+		super(id, nome, email, senha, telefone, Papel.CLIENTE);
 		this.cpf = cpf;
 		this.endereco = endereco;
 	}
