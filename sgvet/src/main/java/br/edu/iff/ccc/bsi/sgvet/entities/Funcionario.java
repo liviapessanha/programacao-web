@@ -3,6 +3,7 @@ package br.edu.iff.ccc.bsi.sgvet.entities;
 import java.util.ArrayList;
 import java.util.List;
 
+import br.edu.iff.ccc.bsi.sgvet.enums.Papel;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.OneToMany;
@@ -25,8 +26,8 @@ public class Funcionario extends Usuario {
 		
 	}
 
-	public Funcionario(String cargo, String horario_trabalho) {
-		super();
+	public Funcionario(Long id, String nome, String email, String senha, String telefone, Papel papel, String cargo, String horario_trabalho) {
+		super(id, nome, email, senha, telefone, Papel.FUNCIONARIO);
 		this.cargo = cargo;
 		this.horario_trabalho = horario_trabalho;
 	}
