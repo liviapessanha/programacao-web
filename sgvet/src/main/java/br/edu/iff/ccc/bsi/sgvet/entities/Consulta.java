@@ -3,7 +3,6 @@ package br.edu.iff.ccc.bsi.sgvet.entities;
 import java.io.Serializable;
 import java.util.Objects;
 
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -11,6 +10,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 @Entity
 public class Consulta implements Serializable {
@@ -20,15 +20,15 @@ public class Consulta implements Serializable {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
 	
-	@ManyToOne(cascade = { CascadeType.PERSIST, CascadeType.MERGE})
+	@ManyToOne
 	@JoinColumn(name = "funcionario_id")
 	private Funcionario funcionario;
 	
-	@ManyToOne(cascade = { CascadeType.PERSIST, CascadeType.MERGE})
+	@ManyToOne
 	@JoinColumn(name = "cliente_id")
 	private Cliente cliente;
 	
-	@ManyToOne(cascade = { CascadeType.PERSIST, CascadeType.MERGE})
+	@ManyToOne
 	@JoinColumn(name = "animal_id")
 	private Animal animal;
 	
@@ -43,19 +43,20 @@ public class Consulta implements Serializable {
 	
 	private String observacoes;
 	
-	@NotBlank(message = "Campo obrigatório.")
+	@NotNull(message = "Campo obrigatório.")
 	private Double valor;
 
 	public Consulta() {
 		
 	}
 	
-	public Consulta(Long id, Funcionario funcionario, Cliente cliente, String hora, String status,
+	public Consulta(Long id, Funcionario funcionario, Cliente cliente, Animal animal, String hora, String status,
 			String motivo_consulta, String observacoes, Double valor) {
 		super();
 		this.id = id;
 		this.funcionario = funcionario;
 		this.cliente = cliente;
+		this.animal = animal;
 		this.hora = hora;
 		this.status = status;
 		this.motivo_consulta = motivo_consulta;

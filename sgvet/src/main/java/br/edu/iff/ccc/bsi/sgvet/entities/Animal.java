@@ -1,6 +1,7 @@
 package br.edu.iff.ccc.bsi.sgvet.entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -47,7 +48,7 @@ private static final long serialVersionUID = 1L;
 	@NotNull(message = "Campo obrigatório.")
 	private Integer idade;
 	
-	@NotBlank(message = "Campo obrigatório.")
+	@NotNull(message = "Campo obrigatório.")
 	@Enumerated(EnumType.STRING)
 	private Sexo sexo;
 	
@@ -59,12 +60,12 @@ private static final long serialVersionUID = 1L;
 	
 	private String observacao;
 	
-	@ManyToOne(cascade = { CascadeType.PERSIST, CascadeType.MERGE})
+	@ManyToOne
 	@JoinColumn(name = "cliente_id")
 	private Cliente cliente;
 	
 	@OneToMany(mappedBy = "animal", cascade = CascadeType.ALL)
-	private List<Consulta> consultas;
+	private List<Consulta> consultas = new ArrayList<>();
 	
 	public Animal() {
 		
