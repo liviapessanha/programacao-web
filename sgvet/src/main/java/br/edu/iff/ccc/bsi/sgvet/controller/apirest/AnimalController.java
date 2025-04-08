@@ -57,7 +57,7 @@ public class AnimalController {
 	@Operation(summary = "Cria um novo animal.")
 	@ApiResponses({
 		@ApiResponse(responseCode = "200", description = "Animal criado com sucesso."),
-		@ApiResponse(responseCode = "404", description = "Dados inválidos."),
+		@ApiResponse(responseCode = "400", description = "Dados inválidos."),
 	})
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)

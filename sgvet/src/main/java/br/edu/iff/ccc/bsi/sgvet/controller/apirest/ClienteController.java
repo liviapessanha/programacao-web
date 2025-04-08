@@ -22,7 +22,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
 @RestController
-@RequestMapping
+@RequestMapping("/api/v1/clientes")
 @Tag(name = "ClienteRest", description = "API para gerenciamento de clientes. Inclui operações CRUD.")
 public class ClienteController {
 	
@@ -58,7 +58,7 @@ public class ClienteController {
 	@Operation(summary = "Cria um novo cliente.")
 	@ApiResponses({
 		@ApiResponse(responseCode = "200", description = "Cliente criado com sucesso."),
-		@ApiResponse(responseCode = "404", description = "Dados inválidos."),
+		@ApiResponse(responseCode = "400", description = "Dados inválidos."),
 	})
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)

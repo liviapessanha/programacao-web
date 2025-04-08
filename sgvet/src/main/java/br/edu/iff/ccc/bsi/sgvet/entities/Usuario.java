@@ -13,6 +13,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.MappedSuperclass;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
 @MappedSuperclass
@@ -39,7 +40,7 @@ public abstract class Usuario implements Serializable {
 	@Size(min = 11, max = 11, message = "O telefone deve ter 11 caracteres.")
 	private String telefone;
 	
-	@NotBlank(message = "Campo obrigatório.")
+	@NotNull(message = "Campo obrigatório.")
 	@Enumerated(EnumType.STRING)
 	private Papel papel;
 	

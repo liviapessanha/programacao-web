@@ -58,7 +58,7 @@ public class ConsultaController {
 	@Operation(summary = "Cria uma nova consulta.")
 	@ApiResponses({
 		@ApiResponse(responseCode = "200", description = "Consulta criada com sucesso."),
-		@ApiResponse(responseCode = "404", description = "Dados inválidos."),
+		@ApiResponse(responseCode = "400", description = "Dados inválidos."),
 	})
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
@@ -67,9 +67,9 @@ public class ConsultaController {
 		return consultaServ.save(consulta);
 	}
 	
-	@Operation(summary = "Cria uma nova consulta.")
+	@Operation(summary = "Atualiza uma nova consulta.")
 	@ApiResponses({
-		@ApiResponse(responseCode = "200", description = "Consulta criada com seucesso."),
+		@ApiResponse(responseCode = "200", description = "Consulta atualizada com sucesso."),
 		@ApiResponse(responseCode = "404", description = "Dados inválidos."),
 	})
 	@PutMapping("/{id}")
