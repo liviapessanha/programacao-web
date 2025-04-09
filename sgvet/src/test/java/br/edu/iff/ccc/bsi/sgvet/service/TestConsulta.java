@@ -189,7 +189,7 @@ public class TestConsulta {
         listaConsultas.add(consulta1);
         listaConsultas.add(consulta2);
         
-        when(consultaRepository.findClienteById(1L)).thenReturn(listaConsultas);
+        when(consultaRepository.findByCliente_Id(1L)).thenReturn(listaConsultas);
         
         List<Consulta> resultado = consultaService.getConsultasByClienteId(1L);
         
@@ -197,6 +197,6 @@ public class TestConsulta {
         assertEquals(2, resultado.size());
         assertEquals(1L, resultado.get(0).getCliente().getId());
         assertEquals(1L, resultado.get(1).getCliente().getId());
-        verify(consultaRepository, times(1)).findClienteById(1L);
+        verify(consultaRepository, times(1)).findByCliente_Id(1L);
     }
  }

@@ -46,7 +46,7 @@ public class ConsultaService {
 	}
 	
 	public List<Consulta> getConsultasByClienteId(Long id) {
-		List<Consulta> consultas = consultaRep.findClienteById(id);
+		List<Consulta> consultas = consultaRep.findByCliente_Id(id);
 		if(consultas.isEmpty()) {
 			throw new ResponseStatusException(
 					HttpStatus.NOT_FOUND,
@@ -57,7 +57,7 @@ public class ConsultaService {
 	}
 	
 	public List<Consulta> getConsultasByAnimalId(Long id) {
-		List<Consulta> consultas = consultaRep.findAnimalById(id);
+		List<Consulta> consultas = consultaRep.findByAnimal_Id(id);
 		if(consultas.isEmpty()) {
 			throw new ResponseStatusException(
 					HttpStatus.NOT_FOUND,

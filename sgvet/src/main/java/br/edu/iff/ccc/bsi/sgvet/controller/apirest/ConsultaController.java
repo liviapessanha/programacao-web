@@ -94,7 +94,7 @@ public class ConsultaController {
 		@ApiResponse(responseCode = "200", description = "Consultas do cliente encontradas."),
 		@ApiResponse(responseCode = "404", description = "Nenhum consulta do cliente encontrada."),
 	})
-	@GetMapping("/cliente/{clientId}")
+	@GetMapping("/cliente/{clienteId}")
 	public List<Consulta> getConsultasByClienteId(@PathVariable Long clienteId) {
 		return consultaServ.getConsultasByClienteId(clienteId);
 	}

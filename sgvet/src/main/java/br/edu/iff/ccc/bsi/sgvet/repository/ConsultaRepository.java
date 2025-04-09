@@ -18,7 +18,7 @@ public interface ConsultaRepository extends JpaRepository<Consulta, Long> {
 	
 	void deleteById(Long id);
 	
-	List<Consulta> findClienteById(Long clienteId);
+	List<Consulta> findByCliente_Id(Long clienteId);
 	
-	List<Consulta> findAnimalById(Long animalId);
+	List<Consulta> findByAnimal_Id(Long animalId);
 }

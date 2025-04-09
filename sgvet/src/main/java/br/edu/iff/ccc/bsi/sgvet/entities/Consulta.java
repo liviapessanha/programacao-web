@@ -67,6 +67,7 @@ public class Consulta implements Serializable {
 	public Long getId() {
 		return id;
 	}
+	
 
 	public void setId(Long id) {
 		this.id = id;
@@ -135,6 +136,7 @@ public class Consulta implements Serializable {
 	public void setAnimal(Animal animal) {
 		this.animal = animal;
 	}
+	
 
 	@Override
 	public int hashCode() {
