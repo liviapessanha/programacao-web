@@ -65,7 +65,7 @@ public class FuncionarioController {
 		//cria colecao com links
 		CollectionModel<EntityModel<Funcionario>> collection = CollectionModel.of(funcionariosComLinks);
 		
-		//add link para ele mesmo
+		//add link para colecao
 		collection.add(linkTo(methodOn(FuncionarioController.class).getAll()).withSelfRel());
 		
 		return collection;
