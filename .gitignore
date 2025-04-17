@@ -1,6 +1,9 @@
 # Compiled class file
 *.class
 
+# Database files
+/sgvet/data/exemplo.mv.db
+
 # Log file
 *.log
 
