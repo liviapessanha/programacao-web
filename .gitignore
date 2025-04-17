@@ -2,7 +2,7 @@
 *.class
 
 # Database files
-/sgvet/data/exemplo.mv.db
+sgvet/data/exemplo.mv.db
 
 # Log file
 *.log
