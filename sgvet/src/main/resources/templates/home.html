@@ -1,10 +1,19 @@
 <!DOCTYPE html>
-<html lang="en-pt">
+<html xmlns:th="http://www.thymeleaf.org" lang="pt-br">
 <head>
 	 <meta charset="UTF-8">
-	 <title>My App Home</title>
+	 <title>Home - SGVET</title>
+	 
+	 <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+	 <link rel="stylesheet" th:href="@{/css/bootstrap-icons.css}">
 </head>
-<body>
-    <h1>Em construção</h1>
+<body class="d-flex">
+	<div th:replace="fragments/layout/navbar :: navbar"></div>
+	
+	<div>
+		<h1>
+			Pagina inicial
+		</h1>
+	</div>
 </body>
 </html>
