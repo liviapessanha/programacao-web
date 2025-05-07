@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="pt-br">
+<head>
+	 <meta charset="UTF-8">
+	 <title>Cadastro Clientes - SGVET</title>
+	 
+	 <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+	 <link rel="stylesheet" th:href="@{/css/bootstrap-icons.css}">
+	 <link rel="stylesheet" th:href="@{/css-app/clientes/styles.css}">
+	 
+	 <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+</head>
+<body class="d-flex">
+	<div th:replace="fragments/layout/navbar :: navbar"></div>
+	
+	<div class="container d-flex flex-column align-items-center">
+		<div class="d-flex gap-2 header-button w-100">
+		     <div class="d-flex gap-2">
+		         <input type="text" class="form-control input-buscar" placeholder="Buscar cliente...">
+		          <button class="btn btn-outline-primary button">Buscar</button>
+		     </div>
+		     <button class="btn btn-success button" data-bs-toggle="modal" data-bs-target="#novoClienteModal">
+		         Novo
+		     </button>
+		</div>
+	
+		<table class="table table-bordered table-hover">
+		      <thead class="table-primary">
+		           <tr>
+		               <th>Nome</th>
+		               <th>Email</th>
+		               <th>Telefone</th>
+		           </tr>
+		        </thead>
+		     <tbody>
+		           <tr th:each="cliente : ${clientes}">
+		               <td th:text="${cliente.nome}">Nome</td>
+		               <td th:text="${cliente.email}">Email</td>
+		               <td th:text="${cliente.telefone}">Telefone</td>
+		           </tr>
+		     </tbody>
+		 </table>
+		 
+		 <div class="modal fade" id="novoClienteModal" tabindex="-1" aria-hidden="true">
+		         <div class="modal-dialog">
+		             <form class="modal-content" th:action="@{/clientes}" th:object="${cliente}" method="post">
+		                 <div class="modal-header">
+		                     <h5 class="modal-title">Novo Cliente</h5>
+		                     <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+		                 </div>
+		                 <div class="modal-body">
+		                     <div class="mb-3">
+		                         <label for="nome" class="form-label">Nome:</label>
+		                         <input type="text" class="form-control" th:field="*{nome}" required />
+		                     </div>
+		                     <div class="mb-3">
+		                         <label for="email" class="form-label">Email:</label>
+		                         <input type="email" class="form-control" th:field="*{email}" required />
+		                     </div>
+							 <div class="mb-3">
+							 	 <label for="senha" class="form-label">Senha do Cliente:</label>
+							 	 <input type="password" class="form-control" th:field="*{senha}" required />
+							 </div>
+		                     <div class="mb-3">
+		                         <label for="telefone" class="form-label">Telefone:</label>
+		                         <input type="text" class="form-control" th:field="*{telefone}" required />
+		                     </div>
+							 <div class="mb-3">
+							 	<label for="cpf" class="form-label">CPF do Cliente:</label>
+							 	<input type="text" class="form-control" th:field="*{cpf}" required />
+							 </div>
+							 <div class="mb-3">
+							 	<label for="endereco" class="form-label">Endereço do Cliente:</label>
+							 	<input type="text" class="form-control" th:field="*{endereco}" required />
+							 </div>
+		                 </div>
+		                 <div class="modal-footer">
+		                     <button type="submit" class="btn btn-primary">Salvar</button>
+		                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+		                 </div>
+		             </form>
+		         </div>
+		   </div>
+	</div>
+</body>
+</html>
