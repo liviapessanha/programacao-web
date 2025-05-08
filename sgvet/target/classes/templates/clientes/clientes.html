@@ -24,7 +24,7 @@
 		     </button>
 		</div>
 	
-		<table class="table table-bordered table-hover">
+		<table class="table table-bordered table-hover mb-4 text-white">
 		      <thead class="table-primary">
 		           <tr>
 		               <th>Nome</th>
@@ -42,7 +42,7 @@
 		 </table>
 		 
 		 <div class="modal fade" id="novoClienteModal" tabindex="-1" aria-hidden="true">
-		         <div class="modal-dialog">
+		         <div class="modal-dialog modal-dialog-centered">
 		             <form class="modal-content" th:action="@{/clientes}" th:object="${cliente}" method="post">
 		                 <div class="modal-header">
 		                     <h5 class="modal-title">Novo Cliente</h5>
@@ -51,27 +51,33 @@
 		                 <div class="modal-body">
 		                     <div class="mb-3">
 		                         <label for="nome" class="form-label">Nome:</label>
-		                         <input type="text" class="form-control" th:field="*{nome}" required />
+		                         <input type="text" class="form-control" th:field="*{nome}" required/>
+								 <p th:if="${#fields.hasErrors('*{nome}')}" th:errors="*{nome}" class="error-message">Nome inválido</p>
 		                     </div>
 		                     <div class="mb-3">
 		                         <label for="email" class="form-label">Email:</label>
-		                         <input type="email" class="form-control" th:field="*{email}" required />
+		                         <input type="email" class="form-control" th:field="*{email}" required/>
+								 <p th:if="${#fields.hasErrors('*{email}')}" th:errors="*{email}" class="error-message">Email inválido</p>
 		                     </div>
 							 <div class="mb-3">
 							 	 <label for="senha" class="form-label">Senha do Cliente:</label>
-							 	 <input type="password" class="form-control" th:field="*{senha}" required />
+							 	 <input type="password" class="form-control" th:field="*{senha}" required/>
+								 <p th:if="${#fields.hasErrors('*{senha}')}" th:errors="*{senha}" class="error-message">Senha inválido</p>
 							 </div>
 		                     <div class="mb-3">
 		                         <label for="telefone" class="form-label">Telefone:</label>
 		                         <input type="text" class="form-control" th:field="*{telefone}" required />
+								 <p th:if="${#fields.hasErrors('*{telefone}')}" th:errors="*{telefone}" class="error-message">Telefone inválido</p>
 		                     </div>
 							 <div class="mb-3">
 							 	<label for="cpf" class="form-label">CPF do Cliente:</label>
-							 	<input type="text" class="form-control" th:field="*{cpf}" required />
+							 	<input type="text" class="form-control" th:field="*{cpf}" required/>
+								<p th:if="${#fields.hasErrors('*{cpf}')}" th:errors="*{cpf}" class="error-message">CPF inválido</p>
 							 </div>
 							 <div class="mb-3">
 							 	<label for="endereco" class="form-label">Endereço do Cliente:</label>
-							 	<input type="text" class="form-control" th:field="*{endereco}" required />
+							 	<input type="text" class="form-control" th:field="*{endereco}" required/>
+								<p th:if="${#fields.hasErrors('*{endereco}')}" th:errors="*{endereco}" class="error-message">Endereço inválido</p>
 							 </div>
 		                 </div>
 		                 <div class="modal-footer">
