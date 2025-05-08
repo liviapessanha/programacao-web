@@ -1,6 +1,9 @@
 package br.edu.iff.ccc.bsi.sgvet.controller.view;
 
+
+
 import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -8,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import br.edu.iff.ccc.bsi.sgvet.entities.Cliente;
@@ -28,9 +32,16 @@ public class MainViewController {
 	}
 	
 	@GetMapping("clientes")
-	public String getClientes(Model model) {
+	public String getClientes(@RequestParam(required = false) String nome, Model model) {
+		
 		model.addAttribute("cliente", new Cliente());
-		model.addAttribute("clientes", clienteRep.findAll());
+		
+		  if (nome != null && !nome.isEmpty()) { 
+			  model.addAttribute("clientes", clienteRep.findByNomeContainingIgnoreCase(nome)); 
+			  return "clientes/clientes";
+		  }
+		 
+		model.addAttribute("clientes", clienteRep.findAll()); 
 		return "clientes/clientes";
 	}
 	

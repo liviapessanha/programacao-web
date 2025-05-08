@@ -13,7 +13,7 @@
 	<form th:action="@{/home}" th:object="${cliente}" method="post"> 
 		<div> 
 			<label for="nome">Nome:</label> 
-			<input type="text" id="name" th:field="*{nome}" th:errorclass="error" /> 
+			<input type="text" id="nome" th:field="*{nome}" th:errorclass="error" /> 
 			<p th:if="${#fields.hasErrors('*{nome}')}" th:errors="*{nome}" class="error-message">Nome inválido</p> 
 		</div> 
 		<div> 
