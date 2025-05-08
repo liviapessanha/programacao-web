@@ -37,7 +37,7 @@ public class ClienteViewController {
 	}
 	
 	@PostMapping
-	 public String saveTask(@Valid @ModelAttribute("cliente") Cliente cliente, BindingResult result, Model model) { 
+	 public String saveCliente(@Valid @ModelAttribute("cliente") Cliente cliente, BindingResult result, Model model) { 
 		if(cliente.getPapel() == null) {
 			cliente.setPapel(Papel.CLIENTE);
 		}

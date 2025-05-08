@@ -23,7 +23,8 @@ public class Funcionario extends Usuario {
 	private String horario_trabalho;
 	
 	public Funcionario() {
-		
+		super();
+		this.setPapel(Papel.FUNCIONARIO);
 	}
 
 	public Funcionario(Long id, String nome, String email, String senha, String telefone, Papel papel, String cargo, String horario_trabalho) {

@@ -22,11 +22,6 @@ public class MainViewController {
 		return "Tela principal";
 	}
 	
-	@GetMapping("funcionarios")
-	@ResponseBody
-	public String getFuncionarios() {
-		return "Tela de funcionarios aqui";
-	}
 }
 
 	

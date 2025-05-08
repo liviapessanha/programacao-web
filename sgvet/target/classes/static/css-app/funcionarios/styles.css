@@ -1,0 +1,35 @@
+.container {
+	max-width: 1200px;
+	margin-top: 40px;
+}
+
+.header-button {
+	margin-bottom: 50px;
+}
+
+.input-buscar {
+	width: 400px;
+}
+
+.button {
+	width: 100px;
+}
+
+.area-buscar {
+	max-width: 750px;
+}
+
+.btn-icon {
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+  cursor: pointer;
+}
+.btn-icon:hover {
+  opacity: 0.75;
+}
+
+.modal {
+	width: 800px;
+}
