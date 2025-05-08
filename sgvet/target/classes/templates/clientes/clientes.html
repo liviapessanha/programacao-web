@@ -42,7 +42,17 @@
 						<button class="btn-icon delete-btn" type="button" th:attr="data-id=${cliente.id}">
 							<i class="bi bi-trash text-dark fs-7 "></i>
 						</button>
-						<button class="btn-icon" type="button">
+						<button 
+							class="btn-icon edit-btn" 
+							type="button"
+							th:attr="data-id=${cliente.id},
+									 data-nome=${cliente.nome},
+									 data-email=${cliente.email},
+									 data-senha=${cliente.senha},
+									 data-telefone=${cliente.telefone},
+									 data-cpf=${cliente.cpf},
+									 data-endereco=${cliente.endereco}"
+						>
 							<i class="bi bi-pencil-fill text-dark fs-7"></i>
 						</button>
 					   </td>
@@ -53,12 +63,13 @@
 		 
 		 <div class="modal fade w-100" id="novoClienteModal" tabindex="-1" aria-hidden="true">
 		         <div class="modal-dialog modal-dialog-centered">
-		             <form class="modal-content" th:action="@{/clientes}" th:object="${cliente}" method="post">
+		             <form id="formClienteModal" class="modal-content" th:action="@{/clientes}" th:object="${cliente}" method="post">
 		                 <div class="modal-header">
 		                     <h5 class="modal-title">Novo Cliente</h5>
 		                     <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
 		                 </div>
 		                 <div class="modal-body">
+							<input type="hidden" name="id" th:field="*{id}"/>
 		                     <div class="mb-3">
 		                         <label for="nome" class="form-label">Nome:</label>
 		                         <input type="text" class="form-control" th:field="*{nome}" required/>
@@ -91,7 +102,7 @@
 							 </div>
 		                 </div>
 		                 <div class="modal-footer">
-		                     <button type="submit" class="btn btn-primary">Salvar</button>
+		                     <button type="submit" id="modalSalvarBtn" class="btn btn-primary">Salvar</button>
 		                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
 		                 </div>
 		            </form>

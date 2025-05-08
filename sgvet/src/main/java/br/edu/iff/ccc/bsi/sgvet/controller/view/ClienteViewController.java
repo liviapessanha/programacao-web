@@ -50,8 +50,26 @@ public class ClienteViewController {
 			return "/clientes/clientes"; // Retorna ao formulário se houver erros } 
 		}
 		
+		if (cliente.getId() != null) {
+			Cliente clienteExistente = clienteRep.findById(cliente.getId()).orElse(null);
+			if (clienteExistente != null) {
+				clienteExistente.setNome(cliente.getNome());
+				clienteExistente.setEmail(cliente.getEmail());
+				clienteExistente.setTelefone(cliente.getTelefone());
+				clienteExistente.setCpf(cliente.getCpf());
+				clienteExistente.setEndereco(cliente.getEndereco());
+				clienteExistente.setSenha(cliente.getSenha());
+				
+				clienteRep.save(clienteExistente);
+				System.out.println("Cliente editado com sucesso!");
+			} else {
+				System.out.println("Cliente com ID não encontrado.");
+			}
+		} else {
 			clienteRep.save(cliente); 
 			System.out.println("Salvo com sucesso!");
-			return "redirect:/clientes"; 
 		}
+		
+		return "redirect:/clientes"; 
+	}
 }
