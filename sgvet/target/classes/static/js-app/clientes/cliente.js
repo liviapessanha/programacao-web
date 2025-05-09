@@ -63,7 +63,7 @@ document.addEventListener("DOMContentLoaded", function () {
 				form.querySelector('input[name="id"]').value = id;
 				
 				
-				new bootstrap.Modal(document.getElementById('novoClienteModal')).show()	;
+				new bootstrap.Modal(document.getElementById('novoClienteModal')).show();
 		});
 	});
 });
