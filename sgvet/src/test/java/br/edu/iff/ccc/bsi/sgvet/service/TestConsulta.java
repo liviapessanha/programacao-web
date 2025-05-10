@@ -7,6 +7,8 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -41,6 +43,10 @@ public class TestConsulta {
         MockitoAnnotations.openMocks(this);
     }
     
+    LocalDate dataConsulta = LocalDate.of(2025, 5, 10);
+    LocalTime horaConsulta1 = LocalTime.of(14, 0);
+    LocalTime horaConsulta2 = LocalTime.of(15, 30);
+    
     @Test
     @DisplayName("should find all consultas with success")
     void testGetAll() {
@@ -56,11 +62,11 @@ public class TestConsulta {
         Animal animal = new Animal();
         animal.setId(1L);
         
-        Consulta consulta1 = new Consulta(1L, funcionario, cliente, animal, "14:00", "Agendada", 
+        Consulta consulta1 = new Consulta(1L, funcionario, cliente, animal, dataConsulta, horaConsulta1, "Agendada", 
                 "Checkup anual", "Paciente sem sintomas aparentes", 150.0);
         consulta1.setAnimal(animal);
         
-        Consulta consulta2 = new Consulta(2L, funcionario, cliente, animal, "15:30", "Confirmada", 
+        Consulta consulta2 = new Consulta(2L, funcionario, cliente, animal, dataConsulta, horaConsulta2, "Confirmada", 
                 "Vacinação", "Trazer carteira de vacinação", 80.0);
         consulta2.setAnimal(animal);
         
@@ -93,7 +99,7 @@ public class TestConsulta {
         Animal animal = new Animal();
         animal.setId(1L);
         
-        Consulta consultaMock = new Consulta(1L, funcionario, cliente, animal, "14:00", "Agendada", 
+        Consulta consultaMock = new Consulta(1L, funcionario, cliente, animal, dataConsulta, horaConsulta2, "Agendada", 
                 "Checkup anual", "Paciente sem sintomas aparentes", 150.0);
         consultaMock.setAnimal(animal);
         
@@ -138,11 +144,11 @@ public class TestConsulta {
         Animal animal = new Animal();
         animal.setId(1L);
         
-        Consulta consultaParaSalvar = new Consulta(null, funcionario, cliente, animal, "14:00", "Agendada", 
+        Consulta consultaParaSalvar = new Consulta(null, funcionario, cliente, animal, dataConsulta, horaConsulta1, "Agendada", 
                 "Checkup anual", "Paciente sem sintomas aparentes", 150.0);
         consultaParaSalvar.setAnimal(animal);
         
-        Consulta consultaSalva = new Consulta(1L, funcionario, cliente, animal, "14:00", "Agendada", 
+        Consulta consultaSalva = new Consulta(1L, funcionario, cliente, animal, dataConsulta, horaConsulta1, "Agendada", 
                 "Checkup anual", "Paciente sem sintomas aparentes", 150.0);
         consultaSalva.setAnimal(animal);
         
@@ -178,11 +184,11 @@ public class TestConsulta {
         Animal animal = new Animal();
         animal.setId(1L);
         
-        Consulta consulta1 = new Consulta(1L, funcionario, cliente, animal, "14:00", "Agendada", 
+        Consulta consulta1 = new Consulta(1L, funcionario, cliente, animal, dataConsulta, horaConsulta1, "Agendada", 
                 "Checkup anual", "Paciente sem sintomas aparentes", 150.0);
         consulta1.setAnimal(animal);
         
-        Consulta consulta2 = new Consulta(2L, funcionario, cliente, animal, "15:30", "Confirmada", 
+        Consulta consulta2 = new Consulta(2L, funcionario, cliente, animal, dataConsulta, horaConsulta1 , "Confirmada", 
                 "Vacinação", "Trazer carteira de vacinação", 80.0);
         consulta2.setAnimal(animal);
         
