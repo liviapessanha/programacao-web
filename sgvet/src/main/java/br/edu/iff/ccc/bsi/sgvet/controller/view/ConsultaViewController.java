@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import br.edu.iff.ccc.bsi.sgvet.entities.Animal;
 import br.edu.iff.ccc.bsi.sgvet.entities.Cliente;
@@ -54,6 +55,39 @@ public class ConsultaViewController {
 		return "consulta/consulta";
 	}
 	
+	@GetMapping("lista")
+	public String getConsultaLista(Model model, @RequestParam(required = false) String status) {
+		model.addAttribute("consulta", new Consulta());
+		
+		if (status != null && !status.isEmpty()) {
+			model.addAttribute("consultas", consultaRep.findByStatusContainingIgnoreCase(status));
+			return "consulta/consultaLista";
+		}
+		
+		model.addAttribute("consultas", consultaRep.findAll());
+		return "consulta/consultaLista";
+	}
+	
+	@GetMapping("/editar")
+	public String editarConsulta(@RequestParam Long id, Model model) {
+	    Consulta consulta = consultaRep.findById(id).orElse(null);
+
+	    if (consulta == null) {
+	        return "redirect:/consultasLista";
+	    }
+
+	    model.addAttribute("consulta", consulta); 
+	    model.addAttribute("clientes", clienteRep.findAll());
+	    model.addAttribute("funcionarios", funcionarioRep.findAll());
+	    model.addAttribute("animais", animalRep.findAll());
+	    model.addAttribute("hora", consulta.getHora());
+	    model.addAttribute("dia", consulta.getDia());
+	    model.addAttribute("status", consulta.getStatus());
+	    model.addAttribute("motivo_consulta", consulta.getMotivo_consulta());
+	    model.addAttribute("observacoes", consulta.getObservacoes());
+	    return "consulta/consulta";
+	}
+	
 	@PostMapping
 	public String saveConsulta(
 			@Valid @ModelAttribute("consulta") Consulta consulta,
@@ -77,12 +111,13 @@ public class ConsultaViewController {
 				consultaExistente.setHora(consulta.getHora());
 				consultaExistente.setDia(consulta.getDia());
 				consultaExistente.setStatus(consulta.getStatus());
+				consultaExistente.setValor(consulta.getValor());
 				consultaExistente.setMotivo_consulta(consulta.getMotivo_consulta());
 				consultaExistente.setObservacoes(consulta.getObservacoes());
 				
 				consultaRep.save(consultaExistente);
 				System.out.println("Consulta editada com sucesso!");
-				return "redirect:/consultas";
+				return "redirect:/consultas/lista";
 			}
 			System.out.println("Consulta com ID não encontrado.");
 		}

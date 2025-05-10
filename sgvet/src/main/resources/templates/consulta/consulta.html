@@ -25,9 +25,13 @@
 		
 			<div class="d-flex justify-content-between w-100">
 				<h1>Nova Consulta</h1>
-				<button type="button" class="btn btn-secondary fs-5 w-10 px-4 py-1">Consultas</button>
+				<!--<a href="/consultas/lista" class="btn btn-secondary fs-5 w-10 px-4 py-1">-->
+				<button type="button" class="btn btn-secondary fs-5 w-10 px-4 py-1">
+					<a class="link" href="/consultas/lista">Consultas</a>
+				</button>
 			</div>
 			
+			<input type="hidden" th:field="*{id}" />
 			<div class="d-flex area-inputs">
 				<div class="d-flex align-items-center w-100">
 					<!--<label for="funcionario">Veterinário:</label>-->
@@ -110,9 +114,9 @@
 						required
 					>
 						<option value="Pendente" selected>Pendente</option>
-						<option value="Finalizado" disabled>Finalizado</option>
-						<option value="Interrompido" disabled>Interrompido</option>
-						<option value="Cancelado" disabled>Cancelado</option>
+						<option value="Finalizado" th:disabled="${consulta.id == null}">Finalizado</option>
+						<option value="Adiado" th:disabled="${consulta.id == null}">Adiado</option>
+						<option value="Cancelado" th:disabled="${consulta.id == null}">Cancelado</option>
 				   </select>
 				</div>
 				<div class="d-flex align-items-center gap-2 w-100">

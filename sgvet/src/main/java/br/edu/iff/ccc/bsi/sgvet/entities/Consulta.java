@@ -5,6 +5,8 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.Objects;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -35,6 +37,7 @@ public class Consulta implements Serializable {
 	private Animal animal;
 	
 	@NotNull(message = "Campo obrigatório.")
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private LocalDate dia;
 	
 	@NotNull(message = "Campo obrigatório.")

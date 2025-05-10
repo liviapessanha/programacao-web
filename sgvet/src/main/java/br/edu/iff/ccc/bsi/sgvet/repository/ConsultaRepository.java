@@ -23,6 +23,6 @@ public interface ConsultaRepository extends JpaRepository<Consulta, Long> {
 	
 	List<Consulta> findByAnimal_Id(Long animalId);
 	
-	List<Animal> findByStatusContainingIgnoreCase(String status);
+	List<Consulta> findByStatusContainingIgnoreCase(String status);
 	
 }

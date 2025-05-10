@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="pt-br">
+<head>
+	 <meta charset="UTF-8">
+	 <title>Lista Consultas - SGVET</title>
+	 
+	 <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+	 <link rel="stylesheet" th:href="@{/css/bootstrap-icons.css}">
+	 <link rel="stylesheet" th:href="@{/css-app/consulta/styles.css}">
+	 <link rel="stylesheet" th:href="@{/css-app/styles.css}">
+	 
+	 
+	 <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+	 
+</head>
+<body class="d-flex">
+	<div th:replace="fragments/layout/navbar :: navbar"></div>
+	
+	<div class="container d-flex flex-column align-items-center w-100">
+		<form th:action="@{/consultas/lista}" method="get" class="d-flex gap-2 header-button w-100">
+			<div class="d-flex gap-2">
+				<input 
+					type="text" 
+					name="status" 
+					class="form-control input-buscar" 
+					placeholder="Buscar consulta por status..." 
+					th:value="${param.status}"
+				>
+					<button type="submit" class="btn btn-outline-primary button">Buscar</button>
+			</div>
+		</form>
+		
+		<table class="table table-bordered table-hover mb-4">
+			<thead class="table-primary">
+				<tr>
+					<th>Veterinário</th>
+					<th>Responsável</th>
+					<th>Cliente</th>
+					<th>Dia</th>
+					<th>Hora</th>
+					<th>Status</th>
+					<th>Ações</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="consulta : ${consultas}">
+						<td th:text="${consulta.funcionario.nome}">Funcionario</td>
+						<td th:text="${consulta.cliente.nome}">cliente</td>
+						<td th:text="${consulta.animal.nome}">animal</td>
+						<td th:text="${consulta.dia}">dia</td>
+						<td th:text="${consulta.hora}">hora</td>
+						<td th:text="${consulta.status}">status</td>
+						<td class="d-flex gap-2">
+							<button class="btn-icon delete-btn" type="button" th:attr="data-id=${consulta.id}">
+									<i class="bi bi-trash text-dark fs-7 "></i>
+							</button>
+							<button 
+								class="btn-icon edit-btn" 
+								type="button"	
+								th:attr="data-id=${consulta.id}"				 
+							>
+								<i class="bi bi-pencil-fill text-dark fs-7"></i>
+						</button>
+					</td>
+				</tr>
+			</tbody>
+	  </table>
+	</div>
+	<script th:src="@{/js-app/consulta/consulta.js}"></script>
+</body>
+</html>
