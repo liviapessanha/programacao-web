@@ -37,7 +37,7 @@ public class Consulta implements Serializable {
 	@NotNull(message = "Campo obrigatório.")
 	private LocalDate dia;
 	
-	@NotBlank(message = "Campo obrigatório.")
+	@NotNull(message = "Campo obrigatório.")
 	private LocalTime hora;
 	
 	@NotBlank(message = "Campo obrigatório.")

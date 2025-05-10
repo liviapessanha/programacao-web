@@ -83,13 +83,6 @@ public class AnimalViewController {
 		System.out.println("Animal salvo com sucesso.");
 		return "redirect:/animais";
 	}
-	
-	/*
-	 * @GetMapping("/cliente") public String novoClienteParaAnimal(Model model) {
-	 * List<Cliente> clientes = clienteRep.findAll();
-	 * 
-	 * model.addAttribute("clientes", clientes); return "animal/animal"; }
-	 */
 }
 
 

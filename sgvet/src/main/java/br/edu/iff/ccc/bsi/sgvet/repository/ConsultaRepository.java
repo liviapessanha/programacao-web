@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import br.edu.iff.ccc.bsi.sgvet.entities.Animal;
 import br.edu.iff.ccc.bsi.sgvet.entities.Consulta;
 
 @Repository
@@ -21,4 +22,7 @@ public interface ConsultaRepository extends JpaRepository<Consulta, Long> {
 	List<Consulta> findByCliente_Id(Long clienteId);
 	
 	List<Consulta> findByAnimal_Id(Long animalId);
+	
+	List<Animal> findByStatusContainingIgnoreCase(String status);
+	
 }
