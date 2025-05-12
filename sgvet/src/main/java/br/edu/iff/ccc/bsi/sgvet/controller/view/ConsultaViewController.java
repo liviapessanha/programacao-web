@@ -20,6 +20,7 @@ import br.edu.iff.ccc.bsi.sgvet.repository.AnimalRepository;
 import br.edu.iff.ccc.bsi.sgvet.repository.ClienteRepository;
 import br.edu.iff.ccc.bsi.sgvet.repository.ConsultaRepository;
 import br.edu.iff.ccc.bsi.sgvet.repository.FuncionarioRepository;
+import br.edu.iff.ccc.bsi.sgvet.services.ConsultaService;
 import jakarta.validation.Valid;
 
 @Controller
@@ -28,6 +29,9 @@ public class ConsultaViewController {
 
 	@Autowired
 	private ConsultaRepository consultaRep;
+	
+	@Autowired
+	private ConsultaService consultaServ;
 	
 	@Autowired
 	private FuncionarioRepository funcionarioRep;
@@ -70,7 +74,7 @@ public class ConsultaViewController {
 	
 	@GetMapping("/editar")
 	public String editarConsulta(@RequestParam Long id, Model model) {
-	    Consulta consulta = consultaRep.findById(id).orElse(null);
+	    Consulta consulta = consultaServ.getById(id);
 
 	    if (consulta == null) {
 	        return "redirect:/consultasLista";
@@ -80,11 +84,7 @@ public class ConsultaViewController {
 	    model.addAttribute("clientes", clienteRep.findAll());
 	    model.addAttribute("funcionarios", funcionarioRep.findAll());
 	    model.addAttribute("animais", animalRep.findAll());
-	    model.addAttribute("hora", consulta.getHora());
-	    model.addAttribute("dia", consulta.getDia());
-	    model.addAttribute("status", consulta.getStatus());
-	    model.addAttribute("motivo_consulta", consulta.getMotivo_consulta());
-	    model.addAttribute("observacoes", consulta.getObservacoes());
+		 
 	    return "consulta/consulta";
 	}
 	
@@ -101,29 +101,7 @@ public class ConsultaViewController {
 			return "consulta/consulta";
 		}
 		
-		if (consulta.getId() != null) {
-			Consulta consultaExistente = consultaRep.findById(consulta.getId()).orElse(null);
-			
-			if (consultaExistente != null) {
-				consultaExistente.setFuncionario(consulta.getFuncionario());
-				consultaExistente.setCliente(consulta.getCliente());
-				consultaExistente.setAnimal(consulta.getAnimal());
-				consultaExistente.setHora(consulta.getHora());
-				consultaExistente.setDia(consulta.getDia());
-				consultaExistente.setStatus(consulta.getStatus());
-				consultaExistente.setValor(consulta.getValor());
-				consultaExistente.setMotivo_consulta(consulta.getMotivo_consulta());
-				consultaExistente.setObservacoes(consulta.getObservacoes());
-				
-				consultaRep.save(consultaExistente);
-				System.out.println("Consulta editada com sucesso!");
-				return "redirect:/consultas/lista";
-			}
-			System.out.println("Consulta com ID não encontrado.");
-		}
-		
-		consultaRep.save(consulta);
-		System.out.println("Consulta salvo com sucesso.");
+		consultaServ.save(consulta);
 		return "redirect:/consultas";
 		
 	}
