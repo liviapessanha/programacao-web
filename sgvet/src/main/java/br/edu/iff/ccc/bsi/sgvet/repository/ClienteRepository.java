@@ -18,4 +18,6 @@ public interface ClienteRepository extends JpaRepository<Cliente, Long> {
 	Cliente save(Cliente cliente);
 	
 	void deleteById(Long id);
+	
+	List<Cliente> findByNomeContainingIgnoreCase(String nome);
 }

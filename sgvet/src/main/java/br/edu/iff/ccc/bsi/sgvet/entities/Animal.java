@@ -64,7 +64,7 @@ private static final long serialVersionUID = 1L;
 	@JoinColumn(name = "cliente_id")
 	private Cliente cliente;
 	
-	@OneToMany(mappedBy = "animal", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "animal")
 	private List<Consulta> consultas = new ArrayList<>();
 	
 	public Animal() {

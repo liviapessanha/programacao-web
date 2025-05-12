@@ -14,10 +14,10 @@ import jakarta.validation.constraints.NotBlank;
 public class Cliente extends Usuario {
 	private static final long serialVersionUID = 1L;
 	
-	@OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "cliente")
 	private List<Consulta> consultas = new ArrayList<>();
 	
-	@OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "cliente")
 	private List<Animal> animais = new ArrayList<>();
 
 	@NotBlank(message = "Campo obrigatório.")
@@ -28,7 +28,8 @@ public class Cliente extends Usuario {
 	private String endereco;
 	
 	public Cliente() {
-		
+		super();
+		this.setPapel(Papel.CLIENTE);
 	}
 
 	public Cliente(Long id, String nome, String email, String senha, String telefone, Papel papel, String cpf, String endereco) {

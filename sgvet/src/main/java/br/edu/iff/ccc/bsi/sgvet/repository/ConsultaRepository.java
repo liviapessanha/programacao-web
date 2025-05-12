@@ -1,5 +1,6 @@
 package br.edu.iff.ccc.bsi.sgvet.repository;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -21,4 +22,9 @@ public interface ConsultaRepository extends JpaRepository<Consulta, Long> {
 	List<Consulta> findByCliente_Id(Long clienteId);
 	
 	List<Consulta> findByAnimal_Id(Long animalId);
+	
+	List<Consulta> findByStatusContainingIgnoreCase(String status);
+	
+	 List<Consulta> findByDiaBetween(LocalDate inicio, LocalDate fim);
+	
 }

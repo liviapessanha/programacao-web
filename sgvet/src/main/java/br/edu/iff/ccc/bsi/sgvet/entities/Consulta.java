@@ -1,7 +1,11 @@
 package br.edu.iff.ccc.bsi.sgvet.entities;
 
 import java.io.Serializable;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.Objects;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -32,8 +36,12 @@ public class Consulta implements Serializable {
 	@JoinColumn(name = "animal_id")
 	private Animal animal;
 	
-	@NotBlank(message = "Campo obrigatório.")
-	private String hora;
+	@NotNull(message = "Campo obrigatório.")
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	private LocalDate dia;
+	
+	@NotNull(message = "Campo obrigatório.")
+	private LocalTime hora;
 	
 	@NotBlank(message = "Campo obrigatório.")
 	private String status;
@@ -50,7 +58,7 @@ public class Consulta implements Serializable {
 		
 	}
 	
-	public Consulta(Long id, Funcionario funcionario, Cliente cliente, Animal animal, String hora, String status,
+	public Consulta(Long id, Funcionario funcionario, Cliente cliente, Animal animal, LocalDate dia, LocalTime hora, String status,
 			String motivo_consulta, String observacoes, Double valor) {
 		super();
 		this.id = id;
@@ -58,6 +66,7 @@ public class Consulta implements Serializable {
 		this.cliente = cliente;
 		this.animal = animal;
 		this.hora = hora;
+		this.dia = dia;
 		this.status = status;
 		this.motivo_consulta = motivo_consulta;
 		this.observacoes = observacoes;
@@ -89,12 +98,20 @@ public class Consulta implements Serializable {
 		this.cliente = cliente;
 	}
 
-	public String getHora() {
+	public LocalTime getHora() {
 		return hora;
 	}
 
-	public void setHora(String hora) {
+	public void setHora(LocalTime hora) {
 		this.hora = hora;
+	}
+	
+	public LocalDate getDia() {
+		return dia;
+	}
+
+	public void setDia(LocalDate dia) {
+		this.dia = dia;
 	}
 
 	public String getStatus() {

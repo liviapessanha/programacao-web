@@ -20,6 +20,10 @@ public interface FuncionarioRepository extends JpaRepository<Funcionario, Long> 
 	
 	void deleteById(Long id);
 	
+	List<Funcionario> findByNomeContainingIgnoreCase(String nome);
+	
+	List<Funcionario> findByCargoContainingIgnoreCase(String cargo);
+	
 	@Query("SELECT f FROM Funcionario f WHERE f.horario_trabalho = :horario_trabalho")
 	List<Funcionario> findByHorarioTrabalhado(String horario_trabalho);
 	
