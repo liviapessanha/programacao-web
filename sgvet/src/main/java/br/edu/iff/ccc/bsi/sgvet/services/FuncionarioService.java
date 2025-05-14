@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
 
 import br.edu.iff.ccc.bsi.sgvet.entities.Funcionario;
+import br.edu.iff.ccc.bsi.sgvet.enums.Papel;
 import br.edu.iff.ccc.bsi.sgvet.repository.FuncionarioRepository;
 
 @Service
@@ -31,6 +32,10 @@ public class FuncionarioService {
 	
 	@Transactional
 	public Funcionario save(Funcionario funcionario) {
+		if (funcionario.getPapel() != null) {
+			funcionario.setPapel(Papel.FUNCIONARIO);
+		}
+		
 		return funcionarioRep.save(funcionario);
 	}
 	
@@ -43,5 +48,16 @@ public class FuncionarioService {
 			);
 		}
 		funcionarioRep.deleteById(id);
+	}
+	
+	public List<Funcionario> getFuncionariosByNome(String nome) {
+		List<Funcionario> funcionarios = funcionarioRep.findByNomeContainingIgnoreCase(nome);
+		if(funcionarios.isEmpty()) {
+			throw new ResponseStatusException(
+					HttpStatus.NOT_FOUND,
+					"Nenhum cliente encontrado."
+			);
+		}
+		return funcionarios;
 	}
 }

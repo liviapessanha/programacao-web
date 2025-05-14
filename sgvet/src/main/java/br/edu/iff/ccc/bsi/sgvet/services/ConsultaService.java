@@ -10,7 +10,6 @@ import org.springframework.web.server.ResponseStatusException;
 
 import br.edu.iff.ccc.bsi.sgvet.entities.Consulta;
 import br.edu.iff.ccc.bsi.sgvet.repository.ConsultaRepository;
-import jakarta.persistence.EntityNotFoundException;
 
 @Service
 public class ConsultaService {
@@ -33,20 +32,6 @@ public class ConsultaService {
 	@Transactional
 	public Consulta save(Consulta consulta) {
 		return consultaRep.save(consulta);
-	}
-	
-	public Consulta salvarOuAtualizar(Consulta consulta) {
-		if (consulta.getId() != null) {
-			Consulta existente = consultaRep.findById(consulta.getId())
-				.orElseThrow(() -> new EntityNotFoundException("Consulta não encontrada"));
-			
-			existente.setFuncionario(consulta.getFuncionario());
-			existente.setCliente(consulta.getCliente());
-
-			return consultaRep.save(existente);
-		} else {
-			return consultaRep.save(consulta);
-		}
 	}
 	
 	@Transactional
@@ -77,6 +62,17 @@ public class ConsultaService {
 			throw new ResponseStatusException(
 					HttpStatus.NOT_FOUND,
 					"Nenhum animal vinculado a essa consulta."
+			);
+		}
+		return consultas;
+	}
+	
+	public List<Consulta> getConsultasByStatus(String status) {
+		List<Consulta> consultas = consultaRep.findByStatusContainingIgnoreCase(status);
+		if(consultas.isEmpty()) {
+			throw new ResponseStatusException(
+					HttpStatus.NOT_FOUND,
+					"Nenhum status encontrado."
 			);
 		}
 		return consultas;
