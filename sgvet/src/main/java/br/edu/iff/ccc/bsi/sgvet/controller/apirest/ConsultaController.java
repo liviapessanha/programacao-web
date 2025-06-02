@@ -74,7 +74,7 @@ public class ConsultaController {
 	})
 	@PutMapping("/{id}")
 	public Consulta update(@PathVariable Long id, @RequestBody Consulta consulta) {
-		consulta.setId(id);
+		 consulta.setId(id); 
 		return consultaServ.save(consulta);
 	}
 	

@@ -77,4 +77,15 @@ public class AnimalService {
 		}
 		return animais;
 	}
+	
+	public List<Animal> getAnimaisByNome(String nome) {
+		List<Animal> animais = animalRep.findByNomeContainingIgnoreCase(nome);
+		if(animais.isEmpty()) {
+			throw new ResponseStatusException(
+					HttpStatus.NOT_FOUND,
+					"Animal como o " + nome + " nao encontrado."
+		    );
+		}
+		return animais;
+	}
 }

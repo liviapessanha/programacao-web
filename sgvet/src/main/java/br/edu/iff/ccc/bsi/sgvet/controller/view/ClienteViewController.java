@@ -11,8 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import br.edu.iff.ccc.bsi.sgvet.entities.Cliente;
-import br.edu.iff.ccc.bsi.sgvet.enums.Papel;
-import br.edu.iff.ccc.bsi.sgvet.repository.ClienteRepository;
+import br.edu.iff.ccc.bsi.sgvet.services.ClienteService;
 import jakarta.validation.Valid;
 
 @Controller
@@ -20,7 +19,7 @@ import jakarta.validation.Valid;
 public class ClienteViewController {
 
 	@Autowired
-	private ClienteRepository clienteRep;
+	private ClienteService clienteServ;
 	
 	@GetMapping
 	public String getClientes(@RequestParam(required = false) String nome, Model model) {
@@ -28,47 +27,30 @@ public class ClienteViewController {
 		model.addAttribute("cliente", new Cliente());
 		
 		  if (nome != null && !nome.isEmpty()) { 
-			  model.addAttribute("clientes", clienteRep.findByNomeContainingIgnoreCase(nome)); 
+			  model.addAttribute("clientes", clienteServ.getClientesByNome(nome)); 
 			  return "clientes/clientes";
 		  }
 		 
-		model.addAttribute("clientes", clienteRep.findAll()); 
+		model.addAttribute("clientes", clienteServ.getAll()); 
 		return "clientes/clientes";
 	}
 	
 	@PostMapping
-	 public String saveCliente(@Valid @ModelAttribute("cliente") Cliente cliente, BindingResult result, Model model) { 
-		if(cliente.getPapel() == null) {
-			cliente.setPapel(Papel.CLIENTE);
-		}
-	
+	 public String saveCliente(
+			 @Valid @ModelAttribute("cliente") Cliente cliente, 
+			 BindingResult result, 
+			 Model model
+	) { 
 		
 		if (result.hasErrors()) { 
 			System.out.println("Tem erro!");
 			result.getAllErrors().forEach(System.out::println);
-			model.addAttribute("clientes", clienteRep.findAll());
-			return "/clientes/clientes"; // Retorna ao formulário se houver erros } 
+			model.addAttribute("clientes", clienteServ.getAll());
+			return "/clientes/clientes";
 		}
-		
-		if (cliente.getId() != null) {
-			Cliente clienteExistente = clienteRep.findById(cliente.getId()).orElse(null);
-			if (clienteExistente != null) {
-				clienteExistente.setNome(cliente.getNome());
-				clienteExistente.setEmail(cliente.getEmail());
-				clienteExistente.setTelefone(cliente.getTelefone());
-				clienteExistente.setCpf(cliente.getCpf());
-				clienteExistente.setEndereco(cliente.getEndereco());
-				clienteExistente.setSenha(cliente.getSenha());
-				
-				clienteRep.save(clienteExistente);
-				System.out.println("Cliente editado com sucesso!");
-			} else {
-				System.out.println("Cliente com ID não encontrado.");
-			}
-		} else {
-			clienteRep.save(cliente); 
-			System.out.println("Salvo com sucesso!");
-		}
+	
+		clienteServ.save(cliente); 
+		System.out.println("Salvo com sucesso!");
 		
 		return "redirect:/clientes"; 
 	}

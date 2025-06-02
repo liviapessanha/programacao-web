@@ -33,35 +33,12 @@ const racasPorEspecie = {
 
 		
 document.addEventListener("DOMContentLoaded", function () {
-	const deleteButtons = document.querySelectorAll(".delete-btn");
+	deleteButtons(".delete-btn", "/api/v1/animais", "animal");
 		
 	const form = document.getElementById("formAnimalModal");
 	const modalTitle = document.querySelector(".modal-title");
 	const modalSalvarBtn = document.getElementById("modalSalvarBtn");
 	const editButtons = document.querySelectorAll(".edit-btn");
-		
-	deleteButtons.forEach(button => {
-			button.addEventListener("click", function () {
-			const animalId = this.getAttribute("data-id");
-				
-			if(confirm("Tem certeza que deseja excluir este animal?")) {
-				fetch(`/api/v1/animais/${animalId}`, {
-					method: "DELETE"
-				})
-				.then(response => {
-					if(response.ok) {
-						location.reload();
-					} else {
-						alert("Erro ao deletar animal.");
-					}
-				})
-				.catch(error => {
-					console.error("Erro na requisição DELETE: ", error);
-					alert("Erro inesperado.");
-				});
-			}
-		});
-	});
 	
 	const novoButton = document.querySelector('button[data-bs-target="#novoAnimalModal"]');
 		

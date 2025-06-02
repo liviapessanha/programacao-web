@@ -1,33 +1,10 @@
 document.addEventListener("DOMContentLoaded", function () {
-	const deleteButtons = document.querySelectorAll(".delete-btn");
+	deleteButtons(".delete-btn", "/api/v1/clientes", "cliente");
 	
 	const form = document.getElementById("formClienteModal");
 	const modalTitle = document.querySelector(".modal-title");
 	const modalSalvarBtn = document.getElementById("modalSalvarBtn");
 	const editButtons = document.querySelectorAll(".edit-btn");
-	
-	deleteButtons.forEach(button => {
-		button.addEventListener("click", function () {
-			const clienteId = this.getAttribute("data-id");
-			
-			if(confirm("Tem certeza que deseja excluir este cliente?")) {
-				fetch(`/api/v1/clientes/${clienteId}`, {
-					method: "DELETE"
-				})
-				.then(response => {
-					if(response.ok) {
-						location.reload();
-					} else {
-						alert("Erro ao deletar cliente.");
-					}
-				})
-				.catch(error => {
-					console.error("Erro na requisição DELETE: ", error);
-					alert("Erro inesperado.");
-				});
-			}
-		});
-	});
 	
 	const novoButton = document.querySelector('button[data-bs-target="#novoClienteModal"]');
 	

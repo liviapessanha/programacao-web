@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="pt-br">
+<head>
+	 <meta charset="UTF-8">
+	 
+	 <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+	 <link rel="stylesheet" th:href="@{/css-app/styles.css}">
+	 
+	 <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+	 
+</head>
+<body>
+	<div th:fragment="modalFuncionario" class="modal fade w-100" id="novoFuncionarioModal" tabindex="-1" aria-hidden="true">
+			   <div class="modal-dialog modal-dialog-centered">
+			            <form id="formFuncionarioModal" class="modal-content w-100" th:action="@{/funcionarios}" th:object="${funcionario}" method="post">
+			                 <div class="modal-header">
+			                     <h5 class="modal-title">Novo Funcionário</h5>
+			                     <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+			                 </div>
+			                 <div class="modal-body">
+								<input type="hidden" name="id" th:field="*{id}"/>
+			                     <div class="mb-3">
+			                         <label for="nome" class="form-label">Nome:</label>
+			                         <input type="text" class="form-control" th:field="*{nome}" required/>
+									 <p th:if="${#fields.hasErrors('*{nome}')}" th:errors="*{nome}" class="error-message">Nome inválido</p>
+			                     </div>
+			                     <div class="mb-3">
+			                         <label for="email" class="form-label">Email:</label>
+			                         <input type="email" class="form-control" th:field="*{email}" required/>
+									 <p th:if="${#fields.hasErrors('*{email}')}" th:errors="*{email}" class="error-message">Email inválido</p>
+			                     </div>
+								 <div class="mb-3">
+								 	 <label for="senha" class="form-label">Senha do Funcionário:</label>
+								 	 <input type="password" class="form-control" th:field="*{senha}" required/>
+									 <p th:if="${#fields.hasErrors('*{senha}')}" th:errors="*{senha}" class="error-message">Senha inválido</p>
+								 </div>
+			                     <div class="mb-3">
+			                         <label for="telefone" class="form-label">Telefone:</label>
+			                         <input type="text" class="form-control" th:field="*{telefone}" required />
+									 <p th:if="${#fields.hasErrors('*{telefone}')}" th:errors="*{telefone}" class="error-message">Telefone inválido</p>
+			                     </div>
+								 <div class="mb-3">
+								 	<label for="cargo" class="form-label">Cargo Funcionário:</label>
+								 	<input type="text" class="form-control" th:field="*{cargo}" required/>
+									<p th:if="${#fields.hasErrors('*{cargo}')}" th:errors="*{cargo}" class="error-message">Cargo inválido</p>
+								 </div>
+								 <div class="mb-3">
+								 	<label for="horario_trabalho" class="form-label">Turno do Funcionario:</label>
+								 	<input type="text" class="form-control" th:field="*{horario_trabalho}" required/>
+									<p th:if="${#fields.hasErrors('*{horario_trabalho}')}" th:errors="*{horario_trabalho}" class="error-message">Horário inválido</p>
+								 </div>
+			                 </div>
+			                 <div class="modal-footer">
+			                     <button type="submit" id="modalSalvarBtn" class="btn btn-primary">Salvar</button>
+			                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+			                 </div>
+			         </form>
+			   </div>
+		</div>	
+</body>
+</html>

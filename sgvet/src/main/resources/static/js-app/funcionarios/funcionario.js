@@ -1,34 +1,11 @@
 document.addEventListener("DOMContentLoaded", function () {
-	const deleteButtons = document.querySelectorAll(".delete-btn");
+	
+	deleteButtons(".delete-btn", "/api/v1/funcionarios", "funcionário");
 	
 	const form = document.getElementById("formFuncionarioModal");
 	const modalTitle = document.querySelector(".modal-title");
 	const modalSalvarBtn = document.getElementById("modalSalvarBtn");
 	const editButtons = document.querySelectorAll(".edit-btn");
-	
-	deleteButtons.forEach(button => {
-		button.addEventListener("click", function () {
-			const funcionarioId = this.getAttribute("data-id");
-			
-			if(confirm("Tem certeza que deseja excluir este funcionário?")) {
-				fetch(`/api/v1/funcionarios/${funcionarioId}`, {
-					method: "DELETE"
-				})
-				.then(response => {
-					if(response.ok) {
-						location.reload();
-					} else {
-						alert("Erro ao deletar funcionário.");
-					}
-				})
-				.catch(error => {
-					console.error("Erro na requisição DELETE: ", error);
-					alert("Erro inesperado.");
-				});
-			}
-		});
-	});
-	
 	const novoButton = document.querySelector('button[data-bs-target="#novoFuncionarioModal"]');
 	
 	novoButton.addEventListener("click", function () {

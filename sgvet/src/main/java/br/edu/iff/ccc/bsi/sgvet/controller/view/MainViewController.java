@@ -46,7 +46,6 @@ public class MainViewController {
 		model.addAttribute("totalCancelados", consultaRep.findByStatusContainingIgnoreCase("Cancelado"));
 		return "index";
 	}
-	
 }
 
 	
