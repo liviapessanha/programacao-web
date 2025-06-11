@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+
+  <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+  <link rel="stylesheet" th:href="@{/css-app/styles.css}">
+</head>
+<body>
+  <div th:fragment="modalInfoConsulta" class="modal fade w-100" id="modalInfoConsulta" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <form
+                id="formIndoModal"
+                class="modal-content w-100"
+                th:action="@{/consulta/info/id}"
+                th:object="${consulta}"
+                method="post"
+        >
+          <div class="modal-header">
+            <h5 class="modal-title">Informações da Consulta</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+          </div>
+
+           <div class="modal-body">
+              <div th:consulta="">
+                <h5>Veterinário: </h5>
+              </div>
+           </div>
+
+          <div class="modal-footer">
+            <button type="submit" id="modalSalvarBtn" class="btn btn-primary">Salvar</button>
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Voltar</button>
+          </div>
+        </form>
+      </div>
+  </div>
+</body>
+</html>
