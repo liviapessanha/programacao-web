@@ -1,7 +1,14 @@
 package br.edu.iff.ccc.bsi.sgvet.services;
 
+import java.time.DayOfWeek;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.Comparator;
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
+import br.edu.iff.ccc.bsi.sgvet.utils.ConsultaUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -76,5 +83,25 @@ public class ConsultaService {
 			);
 		}
 		return consultas;
+	}
+
+	public List<Consulta> getConsultasDaSemana() {
+		LocalDate today = LocalDate.now();
+		LocalDate inicioSemana = today.with(DayOfWeek.MONDAY);
+		LocalDate fimSemana = today.with(DayOfWeek.SUNDAY);
+
+		List<Consulta> consultasSemana = consultaRep.findByDiaBetween(inicioSemana, fimSemana);
+
+		return ConsultaUtils.ordenarConsultasPorDataHora(consultasSemana);
+	}
+
+	public void updateStatus(Long id, String status) {
+		if(!consultaRep.existsById(id)) {
+			throw new ResponseStatusException(
+					HttpStatus.NOT_FOUND,
+					"Consulta com ID " + id + " nao encontrado."
+			);
+		}
+		consultaRep.updateStatusById(id, status);
 	}
 }

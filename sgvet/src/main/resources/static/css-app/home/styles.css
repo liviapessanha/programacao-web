@@ -29,7 +29,16 @@
 	width: 100%;
 }
 
-.teste {
-	background-color: red;
+.title-icons {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.card-icon {
+	cursor: pointer;
+}
+.card-icon:hover {
+	opacity:  0.8;
 }
 

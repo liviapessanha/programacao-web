@@ -22,32 +22,26 @@
 			                     <div class="mb-3">
 			                         <label for="nome" class="form-label">Nome:</label>
 			                         <input type="text" class="form-control" th:field="*{nome}" required/>
-									 <p th:if="${#fields.hasErrors('*{nome}')}" th:errors="*{nome}" class="error-message">Nome inválido</p>
 			                     </div>
 			                     <div class="mb-3">
 			                         <label for="email" class="form-label">Email:</label>
 			                         <input type="email" class="form-control" th:field="*{email}" required/>
-									 <p th:if="${#fields.hasErrors('*{email}')}" th:errors="*{email}" class="error-message">Email inválido</p>
 			                     </div>
 								 <div class="mb-3">
 								 	 <label for="senha" class="form-label">Senha do Funcionário:</label>
 								 	 <input type="password" class="form-control" th:field="*{senha}" required/>
-									 <p th:if="${#fields.hasErrors('*{senha}')}" th:errors="*{senha}" class="error-message">Senha inválido</p>
 								 </div>
 			                     <div class="mb-3">
 			                         <label for="telefone" class="form-label">Telefone:</label>
 			                         <input type="text" class="form-control" th:field="*{telefone}" required />
-									 <p th:if="${#fields.hasErrors('*{telefone}')}" th:errors="*{telefone}" class="error-message">Telefone inválido</p>
 			                     </div>
 								 <div class="mb-3">
 								 	<label for="cargo" class="form-label">Cargo Funcionário:</label>
 								 	<input type="text" class="form-control" th:field="*{cargo}" required/>
-									<p th:if="${#fields.hasErrors('*{cargo}')}" th:errors="*{cargo}" class="error-message">Cargo inválido</p>
 								 </div>
 								 <div class="mb-3">
 								 	<label for="horario_trabalho" class="form-label">Turno do Funcionario:</label>
 								 	<input type="text" class="form-control" th:field="*{horario_trabalho}" required/>
-									<p th:if="${#fields.hasErrors('*{horario_trabalho}')}" th:errors="*{horario_trabalho}" class="error-message">Horário inválido</p>
 								 </div>
 			                 </div>
 			                 <div class="modal-footer">

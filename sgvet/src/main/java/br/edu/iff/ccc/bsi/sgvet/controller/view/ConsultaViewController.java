@@ -1,5 +1,6 @@
 package br.edu.iff.ccc.bsi.sgvet.controller.view;
 
+import java.util.Collections;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -60,11 +61,15 @@ public class ConsultaViewController {
 		model.addAttribute("consulta", new Consulta());
 		
 		if (status != null && !status.isEmpty()) {
-			model.addAttribute("consultas", consultaServ.getConsultasByStatus(status));
+			List<Consulta> consultasFiltradas = consultaServ.getConsultasByStatus(status);
+			Collections.reverse(consultasFiltradas);
+			model.addAttribute("consultas", consultasFiltradas);
 			return "consulta/consultaLista";
 		}
-		
-		model.addAttribute("consultas", consultaServ.getAll());
+
+		List<Consulta> consultas = consultaServ.getAll();
+		Collections.reverse(consultas);
+		model.addAttribute("consultas", consultas);
 		return "consulta/consultaLista";
 	}
 	
