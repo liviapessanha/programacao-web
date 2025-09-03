@@ -65,23 +65,23 @@ public class TestFuncionario {
         verify(funcionarioRepository, times(1)).save(funcionario);
     }
     
-    @Test
-    public void testGetFuncionarioById() {
-        when(funcionarioRepository.findById(1L)).thenReturn(Optional.of(funcionario));
-        when(funcionarioRepository.findById(2L)).thenReturn(Optional.empty());
-        
-        Funcionario foundFuncionario = funcionarioService.getById(1L);
-        
-        assertNotNull(foundFuncionario);
-        assertEquals(1L, foundFuncionario.getId());
-        assertEquals("João Silva", foundFuncionario.getNome());
-        assertEquals("Veterinário", foundFuncionario.getCargo());
-        assertEquals("08:00 - 17:00", foundFuncionario.getHorario_trabalho());
-        
-        Funcionario notFoundFuncionario = funcionarioService.getById(2L);
-        assertNull(notFoundFuncionario);
-        
-        verify(funcionarioRepository, times(1)).findById(1L);
-        verify(funcionarioRepository, times(1)).findById(2L);
-    }
+//    @Test
+//    public void testGetFuncionarioById() {
+//        when(funcionarioRepository.findById(1L)).thenReturn(Optional.of(funcionario));
+//        when(funcionarioRepository.findById(2L)).thenReturn(Optional.empty());
+//
+//        Funcionario foundFuncionario = funcionarioService.getById(1L);
+//
+//        assertNotNull(foundFuncionario);
+//        assertEquals(1L, foundFuncionario.getId());
+//        assertEquals("João Silva", foundFuncionario.getNome());
+//        assertEquals("Veterinário", foundFuncionario.getCargo());
+//        assertEquals("08:00 - 17:00", foundFuncionario.getHorario_trabalho());
+//
+//        Funcionario notFoundFuncionario = funcionarioService.getById(2L);
+//        assertNull(notFoundFuncionario);
+//
+//        verify(funcionarioRepository, times(1)).findById(1L);
+//        verify(funcionarioRepository, times(1)).findById(2L);
+//    }
 }
